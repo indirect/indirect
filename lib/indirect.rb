@@ -6,7 +6,7 @@ module Indirect
 
   def self.info
     OpenStruct.new(
-      name: "Andre Arko",
+      name: "André Arko",
       handle: "indirect",
       job: "Vice Minister of Computation at CloudCity.io",
       oss: "Founder at Ruby Together and Team Lead of Bundler",
@@ -27,7 +27,7 @@ module Indirect
 
   def self.generate_card
     require "colorize"
-    title = [info.name, "/", info.handle].join(" ")
+    title = [info.name.white, "/".green, info.handle.white].join(" ")
 
     work = {
       "Work" => info.job,
