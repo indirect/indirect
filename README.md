@@ -1,28 +1,11 @@
-# Indirect
+# CLI business card
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/indirect`. To experiment with that code, run `bin/console` for an interactive prompt.
+Inspired by hearing [@lynncyrin][lynn] talk about [npx business cards][1] at [!!Con West][!!con], this is a [gemx][2] business card. To see the output, run `gemx indirect`.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'indirect'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install indirect
-
-## Usage
-
-TODO: Write usage instructions here
+[lynn]: https://twitter.com/lynncyrin
+[!!con]: http://bangbangcon.com/west/
+[1]: https://github.com/bnb/bitandbang
+[2]: https://github.com/bundler/gemx
 
 ## Development
 
