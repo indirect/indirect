@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "indirect"
+require "fileutils"
+
+FileUtils.rm Indirect.card_path
+load File.expand_path("../exe/indirect", __dir__)
