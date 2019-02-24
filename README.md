@@ -2,6 +2,8 @@
 
 Inspired by hearing [@lynncyrin][lynn] talk about [npx business cards][1] at [!!Con West][!!con], this is a [gemx][2] business card. To see the output, run `gemx indirect`.
 
+To create your own `gemx` business card, you can fork this repo, put your own info at the top of `indirect.rb`... and then even rename the files, if you want. 😂
+
 [lynn]: https://twitter.com/lynncyrin
 [!!con]: http://bangbangcon.com/west/
 [1]: https://github.com/bnb/bitandbang

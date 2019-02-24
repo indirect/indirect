@@ -11,11 +11,11 @@ module Indirect
       job: "Vice Minister of Computation at CloudCity.io",
       oss: "Founder at Ruby Together and Team Lead of Bundler",
       email: "andre@arko.net",
-      website: "https://arko.net",
-      blog: "https://andre.arko.net",
+      website: "arko.net",
+      blog: "andre.arko.net",
       twitter: "indirect",
       github: "indirect",
-      linkedin: "https://www.linkedin.com/in/andrearko",
+      linkedin: "andrearko",
       card: "indirect",
     )
   end
@@ -27,30 +27,35 @@ module Indirect
 
   def self.generate_card
     require "colorize"
+    colors = [:cyan, :red, :blue, :green].cycle
+
     title = [info.name.white, "/".green, info.handle.white].join(" ")
 
     work = {
-      "Work" => info.job,
-      "Open Source" => info.oss,
+      "Work" => info.job.white,
+      "Open Source" => info.oss.white,
     }.select{|k,v| v }
 
     contact = {
-      "Email" => info.email,
-      "Website" => info.website,
-      "Blog" => info.blog,
-      "Twitter" => info.twitter,
-      "GitHub" => info.github ? "https://github.com/" << info.github.cyan : nil,
-      "LinkedIn" => info.linkedin,
+      "Email" => info.email ? info.email.send(colors.next) : nil,
+      "Website" => info.website ? "https://" << info.website.send(colors.next) : nil,
+      "Blog" => info.blog ? "https://" << info.blog.send(colors.next) : nil,
+      "Twitter" => info.twitter ? "https://" << info.twitter.send(colors.next) : nil,
+      "GitHub" => info.github ? "https://github.com/" << info.github.send(colors.next) : nil,
+      "LinkedIn" => info.linkedin ? "https://linkedin.com/in/" << info.linkedin.send(colors.next) : nil,
     }.select{|k,v| v }
 
     card = {
-      "Card" => info.card ? "npx " << info.card : nil
+      "Card" => info.card ? "gemx ".red << info.card.white : nil
     }.select{|k,v| v }
 
     sections = [work, contact, card]
-    content = title << "\n\n" << [work, contact, card].map do |section|
-      section.map{|line| line.join(": ") }.join("\n")
+
+    body = sections.map do |section|
+      section.map{|name, value| (name + ": ").white.bold << value }.join("\n")
     end.join("\n\n")
+
+    content = [title, body].join("\n\n")
 
     File.write card_path, content
   end
