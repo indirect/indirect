@@ -50,14 +50,39 @@ module Indirect
     }.select{|k,v| v }
 
     sections = [work, contact, card]
+    label_size = sections.map(&:keys).flatten.map(&:length).max
 
     body = sections.map do |section|
-      section.map{|name, value| (name + ": ").white.bold << value }.join("\n")
+      section.map do |name, value|
+        label = sprintf("%#{label_size}s", name) << ": "
+        [label.white.bold, value].join
+      end.join("\n")
     end.join("\n\n")
 
     content = [title, body].join("\n\n")
 
-    File.write card_path, content
+    File.write card_path, in_box(content)
+  end
+
+  def self.in_box(content)
+    require "colorize"
+    width = content.lines.map(&:uncolorize).map(&:length).max
+    edge_size = width + 6
+
+    box = "╭" << "─" * edge_size << "╮\n"
+    box << "│" << " " * edge_size << "│\n"
+
+    title = content.lines.first
+    cc = (width - title.chomp.uncolorize.size) / 2
+    box << "│   " << " " * cc << title.chomp << " " * cc << "   │\n"
+
+    content.lines[1..-1].each do |line|
+      space_count = width - line.chomp.uncolorize.size
+      box << "│   " << line.chomp << " " * space_count << "   │\n"
+    end
+
+    box << "│" << " " * edge_size << "│\n"
+    box << "╰" << "─" * edge_size << "╯"
   end
 
   def self.card_path

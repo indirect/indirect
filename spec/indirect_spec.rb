@@ -3,7 +3,32 @@ RSpec.describe Indirect do
     expect(Indirect::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe "#in_box" do
+    it "boxes text" do
+      content = "hello"
+      expect(Indirect.in_box(content)).to eq(<<-END.chomp
+╭───────────╮
+│           │
+│   hello   │
+│           │
+╰───────────╯
+END
+)
+    end
+
+    it "centers the top line" do
+      content = "hello\n\nthis line is longer"
+      expect(Indirect.in_box(content)).to eq(<<-END.chomp
+╭─────────────────────────╮
+│                         │
+│          hello          │
+│                         │
+│   this line is longer   │
+│                         │
+╰─────────────────────────╯
+END
+)
+    end
   end
+
 end
