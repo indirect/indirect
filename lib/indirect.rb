@@ -8,14 +8,15 @@ module Indirect
     OpenStruct.new(
       name: "André Arko",
       handle: "indirect",
-      job: "Vice Minister of Computation at CloudCity.io",
-      oss: "Founder at Ruby Together and Team Lead of Bundler",
+      job: "Vice Minister of Computation at cloudcity.io",
+      oss: "RubyGems Coordinator at Ruby Central",
       email: "andre@arko.net",
       website: "arko.net",
       blog: "andre.arko.net",
       twitter: "indirect",
       github: "indirect",
       linkedin: "andrearko",
+      mastodon: "fiasco.social/@indirect",
       card: "indirect",
     )
   end
@@ -40,13 +41,14 @@ module Indirect
       "Email" => info.email ? info.email.send(colors.next) : nil,
       "Website" => info.website ? "https://" << info.website.send(colors.next) : nil,
       "Blog" => info.blog ? "https://" << info.blog.send(colors.next) : nil,
-      "Twitter" => info.twitter ? "https://" << info.twitter.send(colors.next) : nil,
       "GitHub" => info.github ? "https://github.com/" << info.github.send(colors.next) : nil,
+      "Mastodon" => info.twitter ? "https://" << info.mastodon.send(colors.next) : nil,
+      "Twitter" => info.twitter ? "https://twitter.com/" << info.twitter.send(colors.next) : nil,
       "LinkedIn" => info.linkedin ? "https://linkedin.com/in/" << info.linkedin.send(colors.next) : nil,
     }.select{|k,v| v }
 
     card = {
-      "Card" => info.card ? "gemx ".red << info.card.white : nil
+      "Card" => info.card ? "gem exec ".red << info.card.white : nil
     }.select{|k,v| v }
 
     sections = [work, contact, card]
@@ -74,7 +76,7 @@ module Indirect
 
     title = content.lines.first
     cc = (width - title.chomp.uncolorize.size) / 2
-    box << "│   " << " " * cc << title.chomp << " " * cc << "   │\n"
+    box << "│   " << " " * cc << title.chomp << " " * cc << "    │\n"
 
     content.lines[1..-1].each do |line|
       space_count = width - line.chomp.uncolorize.size
