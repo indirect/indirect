@@ -16,13 +16,15 @@ module Indirect
   def self.info
     Info.new(
       name: "André Arko",
-      handle: "indirect",
-      job: "Vice Minister of Computation at cloudcity.io",
-      oss: "RubyGems Coordinator at Ruby Central",
+      handle: "@indirect",
+      job: "Founder at Spinel Cooperative",
+      job_website: "spinel.coop",
+      oss: "Member at The Gem Cooperative",
+      oss_website: "gem.coop",
       email: "andre@arko.net",
       website: "arko.net",
       blog: "andre.arko.net",
-      twitter: "indirect",
+      bluesky: "@indirect.io",
       github: "indirect",
       linkedin: "andrearko",
       mastodon: "fiasco.social/@indirect",
@@ -37,13 +39,18 @@ module Indirect
 
   def self.generate_card
     require "colorize"
-    colors = [:cyan, :red, :blue, :green].cycle
+    colors = [:cyan, :green, :blue, :magenta].cycle
 
-    title = [info.name.white, "/".green, info.handle.white].join(" ")
+    title = [info.name, "/".green, info.handle].join(" ")
 
-    work = {
-      "Work" => info.job.white,
-      "Open Source" => info.oss.white,
+    job = {
+      "Work" => info.job,
+      "" => "https://" << info.job_website.send(colors.next),
+    }.select{|k,v| v }
+
+    oss = {
+      "Open Source" => info.oss,
+      "" => "https://" << info.oss_website.send(colors.next),
     }.select{|k,v| v }
 
     contact = {
@@ -52,20 +59,21 @@ module Indirect
       "Blog" => info.blog ? "https://" << info.blog.send(colors.next) : nil,
       "GitHub" => info.github ? "https://github.com/" << info.github.send(colors.next) : nil,
       "Mastodon" => info.twitter ? "https://" << info.mastodon.send(colors.next) : nil,
-      "Twitter" => info.twitter ? "https://twitter.com/" << info.twitter.send(colors.next) : nil,
+      "Bluesky" => info.bluesky ? "https://bsky.app/profile/" << info.bluesky.send(colors.next) : nil,
       "LinkedIn" => info.linkedin ? "https://linkedin.com/in/" << info.linkedin.send(colors.next) : nil,
     }.select{|k,v| v }
 
     card = {
-      "Card" => info.card ? "gem exec ".red << info.card.white : nil
+      "Card" => info.card ? "gem exec " << info.card.send(colors.next) : nil
     }.select{|k,v| v }
 
-    sections = [work, contact, card]
+    sections = [job, oss, contact, card]
     label_size = sections.map(&:keys).flatten.map(&:length).max
 
     body = sections.map do |section|
       section.map do |name, value|
-        label = sprintf("%#{label_size}s", name) << ": "
+        label = sprintf("%#{label_size}s", name)
+        label << (name.empty? ? "  " : ": ")
         [label.white.bold, value].join
       end.join("\n")
     end.join("\n\n")
