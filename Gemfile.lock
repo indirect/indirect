@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    indirect (1.1.0)
+    indirect (1.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -36,4 +36,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   2.5.0.dev
+   2.6.9
