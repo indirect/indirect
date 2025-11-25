@@ -1,11 +1,20 @@
 require "indirect/version"
-require "ostruct"
 
 module Indirect
   class Error < StandardError; end
 
+  class Info
+    def initialize(**args)
+      @args = args
+    end
+
+    def method_missing(name)
+      @args[name.to_sym]
+    end
+  end
+
   def self.info
-    OpenStruct.new(
+    Info.new(
       name: "André Arko",
       handle: "indirect",
       job: "Vice Minister of Computation at cloudcity.io",
