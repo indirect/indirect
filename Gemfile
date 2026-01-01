@@ -1,4 +1,5 @@
 source "https://gem.coop"
+ruby file: ".ruby-version"
 
 # Specify your gem's dependencies in indirect.gemspec
 gemspec
