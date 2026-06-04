@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    card (2.0.1)
+    card (2.0.2)
 
 GEM
   remote: https://gem.coop/
