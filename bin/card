@@ -5,4 +5,4 @@ require "indirect"
 require "fileutils"
 
 FileUtils.rm Indirect.card_path if File.exist? Indirect.card_path
-load File.expand_path("../exe/indirect", __dir__)
+load File.expand_path("../exe/card", __dir__)
