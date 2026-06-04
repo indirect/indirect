@@ -28,7 +28,7 @@ module Indirect
       github: "indirect",
       linkedin: "andrearko",
       mastodon: "fiasco.social/@indirect",
-      card: "indirect",
+      card: "@indirect/card",
     )
   end
 
@@ -63,8 +63,9 @@ module Indirect
       "LinkedIn" => info.linkedin ? "https://linkedin.com/in/" << info.linkedin.send(colors.next) : nil,
     }.select{|k,v| v }
 
+    color = colors.next
     card = {
-      "Card" => info.card ? "gem exec " << info.card.send(colors.next) : nil
+      "Run this card" => info.card ? "brew install " << "rv".send(color) << " && rvx " << info.card.send(color) : nil,
     }.select{|k,v| v }
 
     sections = [job, oss, contact, card]

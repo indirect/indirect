@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "indirect/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "indirect"
+  spec.name          = "card"
   spec.version       = Indirect::VERSION
   spec.authors       = ["Andre Arko"]
   spec.email         = ["andre@arko.net"]
