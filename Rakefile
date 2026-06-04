@@ -8,5 +8,5 @@ task :default => :spec
 task :build => :generate
 
 task :generate do
-  sh "bin/indirect"
+  sh "bin/card"
 end
